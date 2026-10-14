@@ -5,6 +5,7 @@
 //   node scripts/live.mjs show <attestationId>
 //   node scripts/live.mjs trace <attestationId>
 //   node scripts/live.mjs trusted <attestationId> [maxAgeSeconds]
+//   node scripts/live.mjs trustedfrom <attestationId> <maxAgeSeconds> <manifestPrefix>
 //   node scripts/live.mjs lookup <sha256>
 // Signs with a dedicated testnet wallet kept outside the repo.
 import { readFileSync } from "fs";
@@ -76,6 +77,8 @@ if (cmd === "id") {
   console.log(j(await read("trace", [a[0]])));
 } else if (cmd === "trusted") {
   console.log("is_trusted:", await read("is_trusted", [a[0], Number(a[1] || 0)]));
+} else if (cmd === "trustedfrom") {
+  console.log("is_trusted_from:", await read("is_trusted_from", [a[0], Number(a[1] || 0), a[2]]));
 } else if (cmd === "lookup") {
   console.log(j(await read("lookup", [a[0]])));
 } else {
