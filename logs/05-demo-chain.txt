@@ -1,0 +1,37 @@
+## demo root: src-1.0.txt against SHA256SUMS
+  attest tx 0xb11492a4c3bca82bbf8d97152f8d8593cc14e3fe3db8442b70344510b1a188f1
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: 798de811574b0501b8c14173b93cabe0c2ae00b15334fc957c7ac13a4ed2543c
+demo root 798de811574b0501b8c14173b93cabe0c2ae00b15334fc957c7ac13a4ed2543c
+  check tx 0x696a496a2b2c8b10da7bdc9be671438ff0c8fc16c9fda47d44dfb37f9b20159b
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "artifact_url": "https://raw.githubusercontent.com/2TheMoom/lineage/main/demo/src-1.0.txt",
+ "digest": "63b6006c37511ce4112cef15c252fdd119bec64d48a5efd6c753e6a47f11c70b",
+ "filename": "src-1.0.txt",
+ "status": "verified"
+## demo child: build-1.0.txt, vouched with the root in the same list
+  attest tx 0xd0147cf7d2c5584463b2bb48ae7deb611cd6617a9e951ba90c7eefe34d4c4afe
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: bcfab6c5e3463666dcc67454c2ba87d172741f5d5c97c5da8e80272c1c70137f
+demo child bcfab6c5e3463666dcc67454c2ba87d172741f5d5c97c5da8e80272c1c70137f
+  check tx 0x6e1a79ed68506d499e2e8f1c82179b3940b618bc0215c55922d19da49b270f26
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "artifact_url": "https://raw.githubusercontent.com/2TheMoom/lineage/main/demo/build-1.0.txt",
+ "digest": "86d2d3773b11ff6c2eec7acf7a24abf49f094990afb23b3fb2b05d4e634be284",
+ "filename": "build-1.0.txt",
+ "status": "verified"
+is_trusted: true
+## unbound: orphan.txt matches OTHERSUMS, but that list never mentions the root
+  attest tx 0x51e321d420997e7a1cff0977d9413605f5586361249665f781e2c51a45243384
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: 8c7a7c3ff1110d77f9fb2810b4665690ba157ff7d2df9b1ffc2173dde619d382
+orphan 8c7a7c3ff1110d77f9fb2810b4665690ba157ff7d2df9b1ffc2173dde619d382
+GenLayer RPC error (eth_call): fetch failed
+  check tx 0xd776794909130540cd189b6f1180c1005eb8a6dd1218d76708a2c9ee324b0443
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "artifact_url": "https://raw.githubusercontent.com/2TheMoom/lineage/main/demo/orphan.txt",
+ "digest": "",
+ "filename": "orphan.txt",
+ "listed": "d1bfdd31f663c2906ca284eb58ba5e14a3d85c6ca26d43efdc2352f8ae536360",
+ "status": "unbound"
+is_trusted: false

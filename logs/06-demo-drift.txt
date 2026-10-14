@@ -1,0 +1,21 @@
+## drift: root bytes changed after attestation
+  check tx 0x6563d6cb333a4d3f7b7411b9230ecce3d13bdf561a3a1ee87a6114f9e32cbc4a
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "artifact_url": "https://raw.githubusercontent.com/2TheMoom/lineage/main/demo/src-1.0.txt",
+ "checks": 2,
+ "digest": "63b6006c37511ce4112cef15c252fdd119bec64d48a5efd6c753e6a47f11c70b",
+ "filename": "src-1.0.txt",
+ "last_digest": "faae54d143c3e4821d2661e08e3d8ca162515bc9b7cbe4e10e93d97a2f6bfd25",
+ "status": "drifted"
+## taint: the child is untouched but no longer trusted
+ "checks": 1,
+ "status": "verified"
+is_trusted: false
+  "filename": "build-1.0.txt",
+  "status": "verified"
+  "filename": "src-1.0.txt",
+  "status": "drifted"
+## the original digest is still on record
+[
+ "798de811574b0501b8c14173b93cabe0c2ae00b15334fc957c7ac13a4ed2543c"
+]
