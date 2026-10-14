@@ -1,0 +1,46 @@
+## child: jq-linux-amd64, parent = tarball
+GenLayer RPC error (gen_call): fetch failed
+  attest tx 0x41d00ee5d8b8be29c5b2a7030ea0483df5010934cf9859255619f57ee49c10e2
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: 103c7a94510cf1a1c44e476506e4c41ec9160ca6495d3f6e3b2af7bead5d7d16
+child id 103c7a94510cf1a1c44e476506e4c41ec9160ca6495d3f6e3b2af7bead5d7d16
+  check tx 0x560eaef384e9a10e994b94f855b2d64a18f8add2266ffb17e5cf56cf1241b547
+  exec=FINISHED_WITH_RETURN result=AGREE
+{
+ "artifact_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64",
+ "attester": "0x3E19dD3b48e6273bC1fFcBDc23206d90eEcA59e8",
+ "checked_at": 1791984654,
+ "checks": 1,
+ "created_at": 1791984617,
+ "depth": 1,
+ "digest": "5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5",
+ "filename": "jq-linux-amd64",
+ "first_verified_at": 1791984654,
+ "last_digest": "",
+ "listed": "5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5",
+ "manifest_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/sha256sum.txt",
+ "parent": "7e48124d0f7dc33cf8ddb67aa3da0a09763f7b310437b21a721a22d88851a948",
+ "size": 2319424,
+ "status": "verified"
+}
+## trace and trust
+[
+ {
+  "checked_at": 1791984654,
+  "digest": "5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5",
+  "filename": "jq-linux-amd64",
+  "id": "103c7a94510cf1a1c44e476506e4c41ec9160ca6495d3f6e3b2af7bead5d7d16",
+  "status": "verified"
+ },
+ {
+  "checked_at": 1791984536,
+  "digest": "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df703873deeee580c2",
+  "filename": "jq-1.7.1.tar.gz",
+  "id": "7e48124d0f7dc33cf8ddb67aa3da0a09763f7b310437b21a721a22d88851a948",
+  "status": "verified"
+ }
+]
+is_trusted: true
+[
+ "103c7a94510cf1a1c44e476506e4c41ec9160ca6495d3f6e3b2af7bead5d7d16"
+]

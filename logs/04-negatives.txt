@@ -1,0 +1,24 @@
+## unlisted: the list does not name this filename
+  attest tx 0xba3ee0cb4272e967d87fb16723bbfabfbd268c1d15f3741cd8119bebe0d37c46
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: 24e9306e71c98cb55e6912072803df6b693c787ea611b3486a5b1e0b6702a880
+  check tx 0x5499eb30c96ce83fa0d1a97453a84ef7a598b08fe73c36425b124a62a123802a
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "digest": "",
+ "last_digest": "",
+ "listed": "",
+ "manifest_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/sha256sum.txt",
+ "status": "unlisted"
+is_trusted: false
+## mismatch: arm64 bytes served under the amd64 name
+  attest tx 0xf8f4a4650a2be49a18b5541f887d5e85f71d0c4d3f39cd4b0b46dfaee7e16600
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: e6bd2583bdf23f20b31deaf71af1fda4c78f7e40c09690dee23b57a2d78365c3
+  check tx 0x0d4f3416ed29df09bbfc0ed6591a47631c9b4872e00594c909fcb63dad2c3b41
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "digest": "",
+ "last_digest": "",
+ "listed": "5942c9b0934e510ee61eb3e30273f1b3fe2590df93933a93d7c58b81d19c8ff5",
+ "manifest_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/sha256sum.txt",
+ "status": "mismatch"
+is_trusted: false

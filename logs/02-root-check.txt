@@ -1,0 +1,19 @@
+  check tx 0x09f395738720745a176dea9dc55976778b3532f3292f7ae8559e7c96b265ab79
+  exec=FINISHED_WITH_RETURN result=AGREE
+{
+ "artifact_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-1.7.1.tar.gz",
+ "attester": "0x3E19dD3b48e6273bC1fFcBDc23206d90eEcA59e8",
+ "checked_at": 1791984536,
+ "checks": 1,
+ "created_at": 1791984502,
+ "depth": 0,
+ "digest": "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df703873deeee580c2",
+ "filename": "jq-1.7.1.tar.gz",
+ "first_verified_at": 1791984536,
+ "last_digest": "",
+ "listed": "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df703873deeee580c2",
+ "manifest_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/sha256sum.txt",
+ "parent": "",
+ "size": 1950645,
+ "status": "verified"
+}
