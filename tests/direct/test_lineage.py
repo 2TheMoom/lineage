@@ -634,3 +634,90 @@ def test_a_huge_line_cannot_be_used_to_vouch_for_the_parent(direct_vm, direct_de
     _std(direct_vm, man=man)
     c.check(child)
     assert c.get_attestation(child)["status"] == "unbound"
+
+
+# ---------------------------------------------------------------------------
+# publisher-pinned trust
+# ---------------------------------------------------------------------------
+
+
+def test_trace_reports_where_each_link_was_vouched_for(direct_vm, direct_deploy):
+    c = direct_deploy(CONTRACT)
+    direct_vm.warp(T0)
+    _std(direct_vm)
+    root = _root(direct_vm, c)
+    child = _att(c, artifact=BIN_URL, name="app-linux-amd64", parent=root)
+    c.check(child)
+    t = c.trace(child)
+    assert [(n["artifact_url"], n["manifest_url"]) for n in t] == [(BIN_URL, MAN_URL), (SRC_URL, MAN_URL)]
+
+
+def test_trust_from_a_publisher_requires_every_list_to_live_under_the_prefix(direct_vm, direct_deploy):
+    c = direct_deploy(CONTRACT)
+    direct_vm.warp(T0)
+    _std(direct_vm)
+    root = _root(direct_vm, c)
+    child = _att(c, artifact=BIN_URL, name="app-linux-amd64", parent=root)
+    c.check(child)
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/") is True
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/SHA") is False  # a prefix must end in a slash
+    assert c.is_trusted_from(root, 0, "https://dl.example.com/") is True
+    assert c.is_trusted_from(child, 0, "https://other.example.org/") is False
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/releases/") is False
+
+
+def test_one_foreign_link_in_the_chain_breaks_publisher_trust(direct_vm, direct_deploy):
+    """An attacker who vouches for the child on their own site gets is_trusted, but not trust from the real publisher."""
+    c = direct_deploy(CONTRACT)
+    direct_vm.warp(T0)
+    evil = "https://evil.example.net/SHA256SUMS"
+    _std(direct_vm)
+    _serve(direct_vm, {SRC_URL: SRC, BIN_URL: BIN, MAN_URL: STD_MAN, evil: STD_MAN})
+    root = _root(direct_vm, c)
+    child = _att(c, artifact=BIN_URL, name="app-linux-amd64", parent=root, manifest=evil)
+    c.check(child)
+    assert c.get_attestation(child)["status"] == "verified"
+    assert c.is_trusted(child, 0) is True
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/") is False
+    assert c.is_trusted_from(child, 0, "https://evil.example.net/") is False  # the root is not under it
+
+
+def test_a_lookalike_host_does_not_satisfy_a_prefix(direct_vm, direct_deploy):
+    c = direct_deploy(CONTRACT)
+    direct_vm.warp(T0)
+    lookalike = "https://dl.example.com.evil.net/SHA256SUMS"
+    _serve(direct_vm, {SRC_URL: SRC, lookalike: STD_MAN})
+    root = _att(c, manifest=lookalike)
+    c.check(root)
+    assert c.is_trusted(root, 0) is True
+    assert c.is_trusted_from(root, 0, "https://dl.example.com/") is False
+    assert c.is_trusted_from(root, 0, "https://dl.example.com.evil.net/") is True
+
+
+def test_publisher_trust_still_needs_verified_links_and_fresh_checks(direct_vm, direct_deploy):
+    c = direct_deploy(CONTRACT)
+    direct_vm.warp(T0)
+    _std(direct_vm)
+    root = _root(direct_vm, c)
+    child = _att(c, artifact=BIN_URL, name="app-linux-amd64", parent=root)
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/") is False  # pending
+    c.check(child)
+    direct_vm.warp(T3)
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/") is True
+    assert c.is_trusted_from(child, 3600, "https://dl.example.com/") is False  # too old
+    direct_vm.warp(T1)
+    _std(direct_vm, src=b"upstream compromised")
+    c.check(root)
+    assert c.is_trusted_from(child, 0, "https://dl.example.com/") is False  # tainted
+
+
+def test_publisher_trust_never_reverts_on_a_bad_prefix(direct_vm, direct_deploy):
+    c = direct_deploy(CONTRACT)
+    direct_vm.warp(T0)
+    _std(direct_vm)
+    root = _root(direct_vm, c)
+    assert c.is_trusted_from(root, 0, "https://dl.example.com/") is True
+    for bad in ("", "http://dl.example.com/", "https://dl.example.com", "dl.example.com/", 5, None, "https://dl.example.com/" + "a" * 300 + "/"):
+        assert c.is_trusted_from(root, 0, bad) is False
+    assert c.is_trusted_from(root, -1, "https://dl.example.com/") is False
+    assert c.is_trusted_from("unknown", 0, "https://dl.example.com/") is False

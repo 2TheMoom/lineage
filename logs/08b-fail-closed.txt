@@ -1,0 +1,17 @@
+## over the limit (5,146,133 bytes): check result
+  check tx 0x0f20ab9be30c3524981c7db7e2f33254e347d1e7ff4e577e72bd63812df24edb
+  exec=FINISHED_WITH_ERROR result=AGREE
+ "checks": 0,
+ "status": "pending"
+## unreadable (404): check result
+  check tx 0x2b48bf84a025464dd574e7400195f65c3f3ca68cc51160ce0e20e1682fcc1c1f
+  exec=FINISHED_WITH_ERROR result=AGREE
+ "artifact_url": "https://raw.githubusercontent.com/2TheMoom/lineage/main/demo/does-not-exist.txt",
+ "checks": 0,
+ "filename": "ghost.txt",
+ "status": "pending"
+## rate limit: re-check the 3.6 MB attestation again right away
+  check tx 0x7e8fa78d74a53cb7da8a3aa3a4cdac8013b85aaa3f8c4e70d20014f329898a9e
+  exec=FINISHED_WITH_ERROR result=AGREE
+ "checked_at": 1791986272,
+ "checks": 1,

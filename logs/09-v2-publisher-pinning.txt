@@ -1,0 +1,30 @@
+## v2 contract 0x6508856DE231e094BfD121Eb5A30D5C3c03972A9
+## root + child from the real jq release
+  attest tx 0x6daec64da78f82e38bd963d14a110377228f254829ba760f41e880b5bc486adb
+  exec=FINISHED_WITH_RETURN result=AGREE
+  check tx 0x392bc83fd5780815ee61c5387e528ffe03394f383d37b038ebb380d64bfc6c0b
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "manifest_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/sha256sum.txt",
+ "status": "verified"
+  attest tx 0xba9e6c1406a192c047dd4c845480cafd7f965259a5ce67dd0e40ca15334db242
+  exec=FINISHED_WITH_RETURN result=AGREE
+  check tx 0x37c53b9f39f14e36c6cc3a1807a1d7776c2733e85a7b26dc9081ecdc5fb1c204
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "manifest_url": "https://github.com/jqlang/jq/releases/download/jq-1.7.1/sha256sum.txt",
+ "status": "verified"
+## a third party's list vouches for the same binary, same parent
+  attest tx 0x1e582da9476d67f7dd6421df8a5812a420eeeae9d25009491d81e4229bf9df32
+  exec=FINISHED_WITH_RETURN result=AGREE
+  check tx 0x2e9d9032f39e252e68412fb54b9c4811217ef93919e968bc3dcccfe5a45c5547
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "status": "verified"
+root=7e48124d0f7dc33cf8ddb67aa3da0a09763f7b310437b21a721a22d88851a948
+child=103c7a94510cf1a1c44e476506e4c41ec9160ca6495d3f6e3b2af7bead5d7d16
+mirror=eef9b8b1529af27aa0d448a449333aa3082c1319e6d73effd2d7574079eba31c
+## trust gates
+real child, plain:            is_trusted: true
+real child, jq release path:  is_trusted_from: true
+real child, other publisher:  is_trusted_from: false
+mirror child, plain:          is_trusted: true
+mirror child, jq release path:is_trusted_from: false
+bad prefix (no slash):        is_trusted_from: false

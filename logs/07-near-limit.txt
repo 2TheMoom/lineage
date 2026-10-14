@@ -1,0 +1,10 @@
+## near the limit: 3,613,318 byte artifact
+  attest tx 0xdd9c6dfa93d6077909a4e9fbab08039fc7c2fb4a368c69098979e21d3911c357
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: 268d7e5676d877471b590160cc3078898aa644671c52a7acddc17cdffdceba7d
+id 268d7e5676d877471b590160cc3078898aa644671c52a7acddc17cdffdceba7d
+  check tx 0x3eebef74e0ef713750af5faedf746dec2b46efd5234e9a88f2d05da96e934f0f
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "digest": "0f729b4b6f5f28d395c641eacc2e9ff68d0096b85aa0eec344aa62425144b69b",
+ "size": 3613318,
+ "status": "verified"

@@ -209,13 +209,12 @@ class Lineage(gl.Contract):
         cur = attestation_id
         while isinstance(cur, str) and cur in self.atts and len(out) <= MAX_DEPTH:
             a = self.atts[cur]
-            out.append({"id": cur, "filename": a.filename, "status": a.status, "digest": a.digest, "checked_at": a.checked_at})
+            out.append({"id": cur, "filename": a.filename, "status": a.status, "digest": a.digest, "checked_at": a.checked_at,
+                        "artifact_url": a.artifact_url, "manifest_url": a.manifest_url})
             cur = a.parent
         return out
 
-    @gl.public.view
-    def is_trusted(self, attestation_id: str, max_check_age_seconds: int) -> bool:
-        """True only if this attestation and every ancestor is verified and, when an age is given, was checked that recently."""
+    def _trusted(self, attestation_id: str, max_check_age_seconds: int, prefix: str) -> bool:
         if isinstance(max_check_age_seconds, bool) or not isinstance(max_check_age_seconds, int) or max_check_age_seconds < 0:
             return False
         chain = self.trace(attestation_id)
@@ -225,7 +224,22 @@ class Lineage(gl.Contract):
         for n in chain:
             if n["status"] != VERIFIED or (max_check_age_seconds > 0 and now > int(n["checked_at"]) + max_check_age_seconds):
                 return False
+            if prefix != "" and not n["manifest_url"].startswith(prefix):
+                return False
         return True
+
+    @gl.public.view
+    def is_trusted(self, attestation_id: str, max_check_age_seconds: int) -> bool:
+        """True only if this attestation and every ancestor is verified and, when an age is given, was checked that recently.
+        Anyone can publish a self-consistent chain on their own site, so a consumer that cares who vouched should use is_trusted_from."""
+        return self._trusted(attestation_id, max_check_age_seconds, "")
+
+    @gl.public.view
+    def is_trusted_from(self, attestation_id: str, max_check_age_seconds: int, manifest_prefix: str) -> bool:
+        """is_trusted, and every link's checksum list must live under manifest_prefix (ending in '/', e.g. a project's release path)."""
+        if not isinstance(manifest_prefix, str) or not manifest_prefix.endswith("/"):
+            return False
+        return self._trusted(attestation_id, max_check_age_seconds, manifest_prefix)
 
     @gl.public.view
     def lookup(self, digest: str) -> list:

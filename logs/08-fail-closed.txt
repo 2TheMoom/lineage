@@ -1,0 +1,25 @@
+## over the limit: 5,146,133 byte artifact
+  attest tx 0xc820d231f525c34487d760027403f358f054cf44b6b344336706f195f791a572
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: e677fbef2659f69af0bc77801382f17fe1c58fce88dadfd123a1e7d40b77e9d1
+ "parent": "",
+ "size": 0,
+ "status": "pending"
+}
+ "checked_at": 0,
+ "checks": 0,
+ "status": "pending"
+## unreadable: the artifact URL is a 404
+  attest tx 0x248521acaf96cd1531395581b534d20a37ea4b4a80a37b2ea85e3f12140728b8
+  exec=FINISHED_WITH_RETURN result=AGREE
+id: 5ff43d4ad311f22272b118280a668f7381d4a22b73d789389e96cb1db0f61512
+ "parent": "",
+ "size": 0,
+ "status": "pending"
+}
+ "checked_at": 0,
+ "checks": 0,
+ "status": "pending"
+## rate limit: re-check the jq root straight away
+  exec=FINISHED_WITH_RETURN result=AGREE
+ "checks": 2,
